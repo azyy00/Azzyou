@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #080c0f;
+  --color-surface: #0d1117;
+  --color-card: #111820;
+  --color-card-hover: #161f2a;
+  --color-border-subtle: #1a2330;
+  --color-border-glow: rgba(0, 229, 204, 0.25);
+  --color-ink: #c9d6df;
+  --color-muted: #4e5d6e;
+  --color-neon-cyan: #00e5cc;
+  --color-neon-coral: #ff4d6d;
+  --color-gold: #e8b86d;
+  --color-sakura: #e8a0bf;
+  
+  --font-head: 'Georgia', serif;
+  --font-ui: 'Courier New', monospace;
+  
+  --radius-card: 4px;
+  --radius-btn: 6px;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-ui);
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.032;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border-subtle);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-neon-cyan);
+  }
+}
+
+@layer utilities {
+  .section-label {
+    font-family: var(--font-ui);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-neon-cyan);
+  }
+
+  .section-title {
+    font-family: var(--font-head);
+    font-size: 26px;
+    font-weight: 800;
+  }
+
+  .anime-card {
+    transition: all 0.2s ease;
+  }
+
+  .anime-card:hover {
+    border-color: var(--color-neon-cyan);
+    box-shadow: 0 0 15px rgba(0, 229, 204, 0.1);
+  }
+
+  .skeleton {
+    background: linear-gradient(90deg, var(--color-card) 25%, var(--color-card-hover) 50%, var(--color-card) 75%);
+    background-size: 200%;
+    animation: shimmer 1.4s infinite;
+  }
+
+  @keyframes shimmer {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .ticker-inner {
+    animation: ticker 28s linear infinite;
+    white-space: nowrap;
+  }
+}
